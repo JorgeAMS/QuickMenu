@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="restaurantsdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Position" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="IDOrder" />
+    </Key>
+    <Property Name="IDOrder" Type="int" Nullable="false" />
+    <Property Name="TotalPrice" Type="double" Nullable="false" />
+    <Property Name="Table" Type="int" Nullable="false" />
+    <Property Name="PaymentMethod" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.restaurantsdb.orderdetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="orderdetail">
+    <Key>
+      <PropertyRef Name="Product_IDProduct" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="TotalPrice" />
+      <PropertyRef Name="IDOrder" />
+    </Key>
+    <Property Name="Product_IDProduct" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="TotalPrice" Type="double" Nullable="false" />
+    <Property Name="IDOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+    </Key>
+    <Property Name="IDProduct" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Price" Type="double" Nullable="false" />
+    <Property Name="Details" Type="longtext" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_OrderDetails_Order">
+    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="IDOrder" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="IDOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_OrderDetails_Product1">
+    <End Role="product" Type="Self.product" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="Product_IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="restaurantsdbModelStoreContainer">
+    <EntitySet Name="employee" EntityType="Self.employee" Schema="restaurantsdb" store:Type="Tables" />
+    <EntitySet Name="order" EntityType="Self.order" Schema="restaurantsdb" store:Type="Tables" />
+    <EntitySet Name="product" EntityType="Self.product" Schema="restaurantsdb" store:Type="Tables" />
+    <EntitySet Name="orderdetail" EntityType="Self.orderdetail" store:Type="Tables" store:Schema="restaurantsdb">
+      <DefiningQuery>SELECT
+`orderdetail`.`Product_IDProduct`, 
+`orderdetail`.`Quantity`, 
+`orderdetail`.`TotalPrice`, 
+`orderdetail`.`IDOrder`
+FROM `orderdetail` AS `orderdetail`</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_OrderDetails_Order" Association="Self.fk_OrderDetails_Order">
+      <End Role="order" EntitySet="order" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+    <AssociationSet Name="fk_OrderDetails_Product1" Association="Self.fk_OrderDetails_Product1">
+      <End Role="product" EntitySet="product" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
