@@ -11,13 +11,16 @@ namespace QuickMenu.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class employee
     {
         public string Email { get; set; }
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
         public string LoginError { get; set; }
+        public string AddEError { get; set; }
     }
 }

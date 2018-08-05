@@ -1,0 +1,24 @@
+﻿@model QuickMenu.Models.product
+
+<div class="contentform">
+    <h2 class="bugs">Product</h2>
+    <label class="txtlbl">Edit</label>
+</div>
+@using (Html.BeginForm("UpdatePro", "Management", FormMethod.Post))
+{
+    <div class="formDomain">
+        <h2 class="titlefield">Edit @Model.Name</h2>
+        <form class="Dnsform">
+            @Html.HiddenFor(model => model.IDProduct)
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "domain-container", @placeholder = "Write Product Name", @required = "required" } })
+            @Html.ValidationMessageFor(model => model.Name)
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "domain-container", @placeholder = "Write Product Price" } })
+            @Html.ValidationMessageFor(model => model.Price)
+            @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "domain-container", @placeholder = "Write Product Details", @required = "required" } })
+            <!--@Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "domain-container", @type = "file", @name = "Upload" } })-->
+
+        </form>
+        <button type="submit" id="Addr" class="btn-proceed">Proceed</button>
+        <div class="field-validation-error">@Html.DisplayFor(model => model.AddPError)</div>
+    </div>
+}

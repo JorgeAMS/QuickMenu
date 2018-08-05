@@ -1,0 +1,109 @@
+﻿@model QuickMenu.ViewModels.ManagementLoading
+@{
+    Layout = null;
+    if (Session["email"] == null)
+    {
+        Response.Redirect("~/Template/Index");
+    }
+   
+    QuickMenu.Models.employee e = new QuickMenu.Models.employee();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Complements/CSS/ManagementStyle.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="shortcut icon" href="~/Complements/Media/Management/store-ico.ico" />
+    <title>CPanel |restaurant</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="container">
+                    <img src="~/Complements/Media/Management/store.png" />
+                </div>
+            </div>
+            <div class="perfil">
+                <div class="contenedor-prof">
+                    <p>@Session["name"]-@Session["position"]</p>
+                    <img src="~/Complements/Media/Management/user.png" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="infoBar">
+        <div class="ajustes">
+            <h2>Settings</h2>
+        </div>
+        <div class="iconos">
+            <div class="cajaadd">
+                <img src="~/Complements/Media/Management/add.png" />
+            </div>
+            <div class="cajas">
+                <img src="~/Complements/Media/Management/cart.png" />
+            </div>
+        </div>
+    </main>
+    <div class="SectionAdd">
+        <div class="Ventana">
+            <!-- ventana de ajuste -->
+            <div id="AddWindow" class="VentanaAdd">
+                @{ Html.RenderPartial("_EmpAdd", e); }
+            </div>
+        </div>
+    </div>
+    <section class="contenedor-padre">
+        <div class="izq">
+            <div class="txtContenedor">
+                <h2>Modules</h2>
+                @Html.ActionLink("Products", "GetProducts")
+                @Html.ActionLink("Employees", "GetEmployees")
+                @Html.ActionLink("Orders", "GetOrders", "Order")
+                @Html.ActionLink("Editor", "Edit", "Editor")
+                <h2>Account</h2>
+                <a href="@Url.Action("LogOut", "Management")">Logout</a>
+            </div>
+        </div>
+        <div class="derecha">
+            <div id="cards" class="contenedor">
+                @foreach (var x in Model.employees)
+                {
+                    <div class="caja">
+                        <div class="caja-1">
+                            <img src="~/Complements/Media/Management/employee.png" />
+                        </div>
+                        <div class="caja-2">
+                            <div class="info">
+                                @using (Ajax.BeginForm("EditEmp", new AjaxOptions { UpdateTargetId = "AddWindow", InsertionMode = InsertionMode.Replace }))
+                                {
+                                    @Html.HiddenFor(m => m.employees.First().Email, new { Value = x.Email })
+                                    @Html.HiddenFor(m => m.employees.First().Password, new { Value = x.Password })
+                                    @Html.HiddenFor(m => m.employees.First().Name, new { Value = x.Name })
+                                    @Html.HiddenFor(m => m.employees.First().Position, new { Value = x.Position })
+                                    <h3 class="titulo">@x.Name</h3>
+                                    <p>@x.Position</p>
+                                    <button class="edit" type="submit">Edit</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Complements/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Complements/Scripts/AddWindow.js"></script>
+    <script src="~/Complements/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Complements/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Complements/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+
+</html>

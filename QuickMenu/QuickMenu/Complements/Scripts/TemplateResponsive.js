@@ -423,12 +423,12 @@ $('nav .Topnav li .LoginBoton, .SeccionHome .LoSiContenedor .Login').click(funct
   e.stopPropagation();
 });
 /////////////////////////Menu/////////////////////////
-$('.Carta .Articulo').click(function(){
-  $('.SeleccionArticulo').css('transform', 'scale(1,1)');
+$('.Carta .Articulo').click(function () {
+    $('.SeleccionArticulo').css('transform', 'scale(1,1)');
 });
 $('.SeleccionArticulo').click(function () {
     e.stopPropagation();
-  $('.SeleccionArticulo').css('transform', 'scale(0,0)');
+    $('.SeleccionArticulo').css('transform', 'scale(0,0)');
 });
 
 

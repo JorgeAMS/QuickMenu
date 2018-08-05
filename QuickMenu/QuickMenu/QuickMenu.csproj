@@ -95,7 +95,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Complements\CSS\ManagementStyle.css" />
     <Content Include="Complements\CSS\TemplateStyle.css" />
+    <Content Include="Complements\Media\Management\add.png" />
+    <Content Include="Complements\Media\Management\bag.png" />
+    <Content Include="Complements\Media\Management\cart.png" />
+    <Content Include="Complements\Media\Management\coffee.png" />
+    <Content Include="Complements\Media\Management\employee.png" />
+    <Content Include="Complements\Media\Management\main-ico.ico" />
+    <Content Include="Complements\Media\Management\order.png" />
+    <Content Include="Complements\Media\Management\store-ico.ico" />
+    <Content Include="Complements\Media\Management\store.png" />
+    <Content Include="Complements\Media\Management\user.png" />
     <Content Include="Complements\Media\Template\burguer.jpg" />
     <Content Include="Complements\Media\Template\downarrow.png" />
     <Content Include="Complements\Media\Template\fa.jpg" />
@@ -105,6 +116,9 @@
     <Content Include="Complements\Media\Template\pizza.jpg" />
     <Content Include="Complements\Media\Template\Up.png" />
     <Content Include="Complements\Media\Template\uparrow.png" />
+    <Content Include="Complements\Scripts\AddWindow.js" />
+    <Content Include="Complements\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Complements\Scripts\jquery-1.8.0.js" />
     <Content Include="Complements\Scripts\jquery-3.3.1.min.js" />
     <Content Include="Complements\Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Complements\Scripts\jquery.validate.min.js" />
@@ -125,6 +139,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -157,6 +173,13 @@
       <DependentUpon>RestaurantModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DetailsLoading.cs" />
+    <Compile Include="ViewModels\ManagementLoading.cs" />
+    <Compile Include="ViewModels\OrdersLoading.cs" />
+    <Compile Include="ViewModels\ProductDescriptionLoading.cs" />
+    <Compile Include="ViewModels\SHCList.cs" />
+    <Compile Include="ViewModels\ShoppingCartLoading.cs" />
+    <Compile Include="ViewModels\TemplateLoading.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -169,6 +192,18 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Template\Index.cshtml" />
+    <Content Include="Views\Template\_ProDes.cshtml" />
+    <Content Include="Views\Template\_ShCart.cshtml" />
+    <Content Include="Views\Template\_TemLog.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Management\Index.cshtml" />
+    <Content Include="Views\Management\IndexAlt.cshtml" />
+    <Content Include="Views\Management\_EmpAdd.cshtml" />
+    <Content Include="Views\Management\_EmpEdit.cshtml" />
+    <Content Include="Views\Management\_ProAdd.cshtml" />
+    <Content Include="Views\Management\_ProEdit.cshtml" />
+    <Content Include="Views\Order\_OrdDet.cshtml" />
+    <Content Include="Views\Order\_OrdEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

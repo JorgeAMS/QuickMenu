@@ -23,7 +23,9 @@ namespace QuickMenu.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public string Details { get; set; }
-    
+        public string AddPError { get; set; }
+
+
         public virtual ICollection<orderdetail> orderdetails { get; set; }
     }
 }

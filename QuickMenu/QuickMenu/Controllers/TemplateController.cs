@@ -28,7 +28,8 @@ namespace QuickMenu.Controllers
             return sc;
         }
         public ActionResult Index()
-        {            
+        {
+            ViewModels.SHCList.list.Clear();
             return View(Loadpagestyle());            
         }
         [HttpPost]
@@ -69,12 +70,10 @@ namespace QuickMenu.Controllers
         {
             return PartialView("_ProDes", Loadpd(productmodel));
         }
-        public ActionResult AddShC(orderdetail orderdetailmodel, string id)
+        public ActionResult AddShC(orderdetail orderdetailmodel)
         {
-            Debug.WriteLine("hola" + orderdetailmodel.Product_IDProduct + " " + orderdetailmodel.Quantity);
-            List<orderdetail> od = new List<orderdetail>();
-            od.Add(orderdetailmodel);
-            return PartialView("_ShCart",LoadSC(od));            
+            ViewModels.SHCList.list.Add(orderdetailmodel);
+            return PartialView("_ShCart", LoadSC(ViewModels.SHCList.list));
         }
     }
 }

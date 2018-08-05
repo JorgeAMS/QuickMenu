@@ -8,11 +8,13 @@ namespace QuickMenu.ViewModels
 {
     public class ProductDescriptionLoading
     {
-        
-        public orderdetail orddet= new orderdetail();
+
+        public List<orderdetail> orddet = new List<orderdetail>();
         public product product;       
         public ProductDescriptionLoading(product p)
         {
+            orderdetail od = new orderdetail();
+            orddet.Add(od);
             product = p;
         }
     }

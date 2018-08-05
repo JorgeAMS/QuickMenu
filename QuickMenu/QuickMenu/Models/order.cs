@@ -24,8 +24,9 @@ namespace QuickMenu.Models
         public int Table { get; set; }
         public string PaymentMethod { get; set; }
         public string Status { get; set; }
+        public string AddOError { get; set; }
         public System.DateTime Date { get; set; }
-    
+
         public virtual ICollection<orderdetail> orderdetails { get; set; }
     }
 }

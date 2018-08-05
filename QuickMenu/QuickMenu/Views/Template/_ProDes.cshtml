@@ -3,16 +3,21 @@
 <div class="SeleccionInfo">
     <img src="~/Complements/Media/Template/pizza.jpg" width="40%">
     <div class="SeleccionTextos">
-        @using (Html.BeginForm("AddShC","Template"))
-        {
+        @using (Ajax.BeginForm("AddShC", "Template", new AjaxOptions { UpdateTargetId = "shc" }))
+    {
         <h1>@Model.product.Name</h1>
         <p>@Model.product.Details</p>
         <p>$@Model.product.Price</p>
-        @Html.HiddenFor(x => x.orddet.Product_IDProduct, new { Value = Model.product.IDProduct })
-        @Html.EditorFor(x => x.orddet.Quantity);
-        @Html.HiddenFor(x => x.orddet.TotalPrice, new { Value = Model.product.Price })
-        @Html.HiddenFor(x => x.orddet.IDOrder, new { Value = 1})
-        <button class="SeleccionAgregar" type="submit">Add</button>
-        }
+        @Html.HiddenFor(x => x.orddet.First().Product_IDProduct, new { Value = Model.product.IDProduct })
+        @Html.EditorFor(x => x.orddet.First().Quantity);
+    @Html.HiddenFor(x => x.orddet.First().TotalPrice, new { Value = Model.product.Price })
+    @Html.HiddenFor(x => x.orddet.First().IDOrder, new { Value = 1 })
+    <button class="SeleccionAgregar" onclick="cd()" type="submit">Add</button>
+    <script>
+            function cd() {
+                $('.SeleccionArticulo').css('transform', 'scale(0,0)');
+            }
+    </script>
+}
     </div>
 </div>

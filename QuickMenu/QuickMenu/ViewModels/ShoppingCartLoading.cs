@@ -24,7 +24,8 @@ namespace QuickMenu.ViewModels
                     using (restaurantsdbEntities dbp = new restaurantsdbEntities())
                     {                   
                        var Getpname = dbp.products.Where(x => x.IDProduct == r.Product_IDProduct).First();
-                    }
+                        pnames.Add(Getpname);
+                }
                                        
                 }                
             

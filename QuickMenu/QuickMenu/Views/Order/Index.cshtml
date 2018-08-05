@@ -1,0 +1,113 @@
+﻿@model QuickMenu.ViewModels.OrdersLoading
+@{
+    Layout = null;
+    if (Session["email"] == null)
+    {
+        Response.Redirect("~/Template/Index");
+    }
+   
+    QuickMenu.Models.product p = new QuickMenu.Models.product();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Complements/CSS/ManagementStyle.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="shortcut icon" href="~/Complements/Media/Management/store-ico.ico" />
+    <title>CPanel | restaurant</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="container">
+                    <img src="~/Complements/Media/Management/store.png" />
+                </div>
+            </div>
+            <div class="perfil">
+                <div class="contenedor-prof">
+                    <p>@Session["name"]-@Session["position"]</p>
+                    <img src="~/Complements/Media/Management/user.png" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="SectionAdd">
+        <div class="Ventana">
+            <!-- ventana de ajuste -->
+            <div id="EditWindow" class="VentanaAdd">
+
+            </div>
+        </div>
+    </div>
+    <section class="contenedor-padre">
+        <div class="izq">
+            <div class="txtContenedor">
+                <h2>Modules</h2>
+                @if ((string)Session["position"] == "Gerente")
+                {
+                    @Html.ActionLink("Products", "GetProducts", "Management")
+                    @Html.ActionLink("Employees", "GetEmployees", "Management")
+                }
+                @Html.ActionLink("Orders", "GetOrders")
+                @Html.ActionLink("Editor", "Edit", "Editor")
+                <h2>Account</h2>
+                <a href="@Url.Action("LogOut", "Order")">Logout</a>
+            </div>
+        </div>
+        <div class="derecha">
+            <div id="cards" class="contenedor">
+                @foreach (var x in Model.orders)
+                {
+                    <div class="caja">
+                        <div class="caja-1">
+                            <img src="~/Complements/Media/Management/order.png" />
+                        </div>
+                        <div class="caja-2">
+                            <div class="info">
+                                @using (Ajax.BeginForm("DetOrd", new AjaxOptions { UpdateTargetId = "EditWindow", InsertionMode = InsertionMode.Replace }))
+                                {
+                                    @Html.HiddenFor(m => m.orders.First().IDOrder, new { Value = x.IDOrder })
+                                    @Html.HiddenFor(m => m.orders.First().Table, new { Value = x.Table })
+                                    @Html.HiddenFor(m => m.orders.First().Date, new { Value = x.Date })
+                                    @Html.HiddenFor(m => m.orders.First().PaymentMethod, new { Value = x.PaymentMethod })
+                                    @Html.HiddenFor(m => m.orders.First().TotalPrice, new { Value = x.TotalPrice })
+                                    @Html.HiddenFor(m => m.orders.First().Status, new { Value = x.Status })
+                                    <h3 class="titulo">Order #@x.IDOrder</h3>
+                                    <p>@x.Status</p>
+                                    <button class="edit" type="submit" name="action:DetOrd">View Details</button>
+                                }
+                                @using (Ajax.BeginForm("EditOrd", new AjaxOptions { UpdateTargetId = "EditWindow", InsertionMode = InsertionMode.Replace }))
+                                {
+                                    @Html.HiddenFor(m => m.orders.First().IDOrder, new { Value = x.IDOrder })
+                                    @Html.HiddenFor(m => m.orders.First().Table, new { Value = x.Table })
+                                    @Html.HiddenFor(m => m.orders.First().Date, new { Value = x.Date })
+                                    @Html.HiddenFor(m => m.orders.First().PaymentMethod, new { Value = x.PaymentMethod })
+                                    @Html.HiddenFor(m => m.orders.First().TotalPrice, new { Value = x.TotalPrice })
+                                    @Html.HiddenFor(m => m.orders.First().Status, new { Value = x.Status })
+                                    <button class="edit" type="submit" name="action:EditOrd">Edit</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+    <script src="~/Complements/Scripts/jquery-1.8.0.js"></script>
+    <script src="~/Complements/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Complements/Scripts/AddWindow.js"></script>
+    <script src="~/Complements/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Complements/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Complements/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+
+</html>

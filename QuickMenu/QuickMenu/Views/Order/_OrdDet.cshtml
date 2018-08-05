@@ -1,0 +1,23 @@
+﻿@model QuickMenu.ViewModels.DetailsLoading
+
+
+<div class="contentform">
+    <h2 class="bugs">Order</h2>
+    <label class="txtlbl">Details</label>
+</div>
+<div class="formDomain">
+    <h2 class="titlefield">Details Order #@Model.order.IDOrder</h2>
+    <form class="Dnsform">
+        <p>Table: @Model.order.Table</p>
+        <p>PaymentMethod: @Model.order.PaymentMethod</p>
+        <p>Total Price: @Model.order.TotalPrice</p>
+        <p>Status: @Model.order.Status</p>        
+        <table>
+            <tr><th>Product</th><th>Quantity</th><th>Price</th></tr>
+            @foreach (var x in Model.orderdetails)
+        {
+            <tr><th>@Model.pnames.Find(r => r.IDProduct == x.Product_IDProduct).Name</th><th> @x.Quantity </th><th>@x.TotalPrice</th></tr>
+    }
+        </table>
+    </form>
+</div>
