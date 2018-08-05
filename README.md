@@ -1,2 +1,2 @@
 # QuickMenu
-Hope it works at 1pm
+Hope it works at 1pm c':
