@@ -27,6 +27,11 @@ namespace QuickMenu.Controllers
             ViewModels.ShoppingCartLoading sc = new ViewModels.ShoppingCartLoading(od);
             return sc;
         }
+        private ViewModels.OrdFinishLoading LoadOrdFin()
+        {
+            ViewModels.OrdFinishLoading of = new ViewModels.OrdFinishLoading(ViewModels.SHCList.list);
+            return of;
+        }
         public ActionResult Index()
         {
             ViewModels.SHCList.list.Clear();
@@ -74,6 +79,10 @@ namespace QuickMenu.Controllers
         {
             ViewModels.SHCList.list.Add(orderdetailmodel);
             return PartialView("_ShCart", LoadSC(ViewModels.SHCList.list));
+        }
+        public ActionResult AddOrd()
+        {
+            return PartialView("_OrdFin", LoadOrdFin());
         }
     }
 }

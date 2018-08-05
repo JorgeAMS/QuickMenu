@@ -431,7 +431,6 @@ $('.SeleccionArticulo').click(function () {
     $('.SeleccionArticulo').css('transform', 'scale(0,0)');
 });
 
-
 $('.ListaCompras .UpIcon, .ListaCompras .ListaTitulo').hover(function(){
   if(ListaAbierta == false && EsCelGen == false){
     $('.ListaCompras').css('transform', 'translateY(-67px)');
@@ -451,7 +450,7 @@ $('.ListaCompras .UpIcon, .ListaCompras .ListaTitulo').click(function(){
     else{
       $('.ListaCompras').css('transform', 'translateY(-313px)');
     }
-    $('.ListaCompras .UpIcon').css('background-image', 'url(img/downarrow.png)');
+      $('.ListaCompras .UpIcon').css('background-image', 'url(../Media/Template/uparrow.png)');
   }
   else{
     ListaAbierta = false;
@@ -467,6 +466,8 @@ $('.ListaCompras .UpIcon, .ListaCompras .ListaTitulo').click(function(){
     else{
       $('.ListaCompras').css('transform', 'translateY(-35px)');
     }
-    $('.ListaCompras .UpIcon').css('background-image', 'url(img/uparrow.png)');
+      $('.ListaCompras .UpIcon').css('background-image', 'url(../Media/Template/uparrow.png)');
   }
 });
+
+

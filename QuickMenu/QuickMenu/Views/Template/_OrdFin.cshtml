@@ -1,0 +1,28 @@
+﻿@model QuickMenu.ViewModels.OrdFinishLoading
+@{
+    List<string> payments = new List<string>();
+    payments.Add("Efectivo");
+    payments.Add("Pay U");
+    payments.Add("PayPal");
+    System.Web.Mvc.SelectList paymentslist = new SelectList(payments);
+
+}
+
+@using (Html.BeginForm("OrdAdd", "Template", FormMethod.Post))
+{
+    <Label class="lbl">Finish Order</Label>
+    <form id="FormularioLogin">
+        <div class="ContFormLogin">
+            <div class="LoginCampos">
+                @Html.DisplayFor(model => model.order.IDOrder, new { htmlAttributes = new { @class = "input-container", @value = "Table", @required = "required" } })
+                @Html.EditorFor(model => model.order.Table, new { htmlAttributes = new { @class = "input-container", @placeholder = "Table", @required = "required" } })
+                @Html.DropDownListFor(model => model.order.PaymentMethod, paymentslist, new { htmlAttributes = new { @class = "domain-container select-field", @value = "Select Position", @required = "required" } })
+
+            </div>
+            <div class="LoginBotones">
+                <button type="submit" id="EnviaL">Finish</button>
+            </div>
+            
+        </div>
+    </form>
+}
