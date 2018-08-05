@@ -205,7 +205,6 @@
     <Content Include="Views\Management\_ProEdit.cshtml" />
     <Content Include="Views\Order\_OrdDet.cshtml" />
     <Content Include="Views\Order\_OrdEdit.cshtml" />
-    <Content Include="Views\Template\_OrdFin2.cshtml" />
     <Content Include="Views\Template\_OrdFin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
